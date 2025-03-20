@@ -1,0 +1,67 @@
+pipeline {
+    agent {
+        label 'cme'
+    }
+    options {
+        disableConcurrentBuilds()
+    }
+    triggers {
+        cron '''TZ=America/Chicago
+        5 3 * * *'''
+    }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn clean install -DskipTests'
+                dir ('surefire-reports') {
+                    deleteDir()
+                }
+            }
+        }
+        stage('docker-compose-list'){
+            steps {
+                    sh 'docker-compose -f docker-composes/docker-compose-up.yml ps'
+                }
+        }
+        stage('Retrieve Container Info') {
+            steps {
+                copyArtifacts(
+                    projectName: 'selenium-hub-up',
+                    filter: 'container_info.json',
+                    target: './'
+                )
+            }
+        }
+        stage('test-tcs-chrome') {
+            steps {
+                script {
+                    sh 'mvn surefire:test -Dtest=StaffTNGTest -Dbrowser=chrome'
+                }
+            }
+        }
+        stage('test-tcs-msedge') {
+            steps {
+                script {
+                    sh 'mvn surefire:test -Dtest=StaffTNGTest -Dbrowser=msedge'
+                }
+            }
+        }
+    }
+    post {
+        always {
+                    echo "Notifying build result by email to nlopez@hchb.com"
+                }
+        success {
+                    emailext body: 'The OTP-Smoke Test has been successful', compressLog: true, subject: 'OTP-SmokeTest - successful', to: 'nlopez@hchb.com'
+                }
+        failure {
+                    emailext body: 'The OTP-Smoke Test was marked as failure', compressLog: true, subject: 'OTP-SmokeTest - FAILURE', to: 'nlopez@hchb.com'
+                }
+        unstable {
+                    emailext body: 'The OTP-Smoke Test was marked as unstable', compressLog: true, subject: 'OTP-SmokeTest - UNSTABLE', to: 'nlopez@hchb.com'
+                 }
+        changed {
+                    emailext body: 'The OTP-Smoke Test was previously failing but is now successful', compressLog: true, subject: 'OTP-SmokeTest - CHANGED', to: 'nlopez@hchb.com'
+                }
+    }
+}

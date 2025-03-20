@@ -1,0 +1,52 @@
+pipeline {
+    agent {
+        label 'cme'
+    }
+    options {
+        disableConcurrentBuilds()
+    }
+    triggers {
+        cron '''TZ=America/Chicago
+            1 3 * * *'''
+    }
+    environment {
+        COMPOSE_HTTP_TIMEOUT = "120"
+    }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn clean install -DskipTests'
+                    dir ('surefire-reports') {
+                        deleteDir()
+                }
+            }
+        }
+        stage('docker-compose-create-and-start'){
+            steps {
+                script {
+                    def retries = 3
+                    def exitCode = 1
+
+                    retry(retries) {
+                        def result = sh(script: 'docker-compose -f docker-composes/docker-compose-up.yml up -d', returnStatus: true)
+                        exitCode = result
+                    }
+
+                    if (exitCode != 0) {
+                        error "Failed to start docker-compose after $retries retries."
+                    }
+                }
+            }
+        }
+        stage('List Docker Containers'){
+            steps {
+                sh 'bash Jenkins/Integration/SeleniumHubUp/captureContainerInfo.sh'
+            }
+        }
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'container_info.json', allowEmptyArchive: true
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+version: "3"
+services:
+
+  selenium-hub:
+    image: selenium/hub:4.24.0-20240907
+    container_name: selenium-hub
+    ports:
+      - "4444:4444" #Left port -> host machine. Right port -> container ports.
+      - "4442:4442"
+      - "4443:4443"
+
+  ChromeService:
+    image: selenium/node-chrome:4.24.0-20240907
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=10
+
+  EdgeService:
+    image: selenium/node-edge:4.24.0-20240907
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=10
+
+
+
+# For local runs on Docker Desktop
+#Command to run: docker compose -f docker-compose-up.yml up -d
+#Command to run for ChromeService scale: docker compose -f docker-compose-up.yml up --scale ChromeService=4
+#Command to run for ChromeService & FirefoxService scale: docker compose -f docker-compose-up.yml up --scale ChromeService=4 --scale FirefoxService=4
+
+# To stop the grid, we can press ctrl+c in the command prompt/terminal, and it will instantly stop the containers.
+# To Stop and remove containers, networks, volumes, and images created by docker compose up we can use the following command:
+#  docker compose -f docker-compose-up.yml down

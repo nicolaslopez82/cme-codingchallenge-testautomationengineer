@@ -1,0 +1,33 @@
+pipeline {
+    agent {
+        label 'cme'
+    }
+    options {
+        disableConcurrentBuilds()
+    }
+    triggers {
+        cron '''TZ=America/Chicago
+        0 3 * * *'''
+    }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn clean install -DskipTests'
+                    dir ('surefire-reports') {
+                        deleteDir()
+                }
+            }
+        }
+        stage('docker ls'){
+            steps{
+                sh 'docker container ps --all'
+            }
+        }
+        stage('docker-compose-stop-and-remove-containers'){
+            steps{
+                sh 'docker rm -f docker-composes_ChromeService_1'
+                sh 'docker rm -f selenium-hub'
+            }
+        }
+    }
+}
