@@ -202,4 +202,17 @@ public class Functions {
 
 		return date;
 	}
+
+	public static boolean isElementDisplayed(WebDriver driver, By locator, String elementDescription, int timeout) {
+		try {
+			// Check if the element is displayed
+			boolean isDisplayed = driver.findElement(locator).isDisplayed();
+			System.out.println("Verified element '" + elementDescription + "' is " + (isDisplayed ? "Displayed" : "NOT Displayed"));
+			return isDisplayed;
+		} catch (Exception e) {
+			// Log the exception and return false
+			System.out.println("Exception: " + e.getMessage());
+			return false;
+		}
+	}
 }

@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import pagesObjects.LoginPage;
 import utils.CommonTestOperation;
-
+import static org.testng.Assert.assertTrue;
 
 public class LoginFailureVerificationTNGTest extends ChromeWithWebDriverManagerTest {
 
@@ -19,12 +19,12 @@ public class LoginFailureVerificationTNGTest extends ChromeWithWebDriverManagerT
         try{
             LoginPage.launchCMELogin(driver, PropertiesCache.getInstance().getProperty(CMEConstants.CME_PORTAL_TEST_URL_LOGIN));
             CommonTestOperation.maximizeWindow(driver);
-            Assert.assertTrue(super.findElementWaitForVisible(By.xpath("//*[@id='login-panel']")).isDisplayed());
+            assertTrue(super.findElementWaitForVisible(By.xpath("//*[@id='login-panel']")).isDisplayed());
             LoginPage.setTextInUsername(driver);
             LoginPage.setTextInPassword(driver);
             LoginPage.clickLogin(driver);
             Thread.sleep(4000);
-            Assert.assertTrue(LoginPage.verifyErrorMessage(driver));
+            assertTrue(LoginPage.verifyErrorMessage(driver));
             CommonTestOperation.tearDownTest(true);
         } catch(Exception e){
             CommonTestOperation.logException(e);
