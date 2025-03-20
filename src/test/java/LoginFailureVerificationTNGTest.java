@@ -1,10 +1,6 @@
-package run;
-
 import cache.PropertiesCache;
 import constants.CMEConstants;
-import ChromeWithWebDriverManagerTest;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -14,9 +10,7 @@ import utils.CommonTestOperation;
 
 public class LoginFailureVerificationTNGTest extends ChromeWithWebDriverManagerTest {
 
-    private static final Logger logger = LogManager.getLogger(LoginFailureVerificationTNGTest.class);
-
-    @Test
+    @Test(groups = "regression")
     public void loginFailureVerification (){
         WebDriver driver = super.getDriver();
         CommonTestOperation.setupTest("loginFailureVerification", "Verify that attempting to log in with the username '00000'" +
@@ -24,6 +18,7 @@ public class LoginFailureVerificationTNGTest extends ChromeWithWebDriverManagerT
                 "having trouble logging you in.'")  ;
         try{
             LoginPage.launchCMELogin(driver, PropertiesCache.getInstance().getProperty(CMEConstants.CME_PORTAL_TEST_URL));
+            Assert.assertTrue(super.findElementWaitForVisible(By.xpath("//*[@id='login-panel']")).isDisplayed());
             LoginPage.setTextInUsername(driver);
             LoginPage.setTextInPassword(driver);
             LoginPage.clickLogin(driver);

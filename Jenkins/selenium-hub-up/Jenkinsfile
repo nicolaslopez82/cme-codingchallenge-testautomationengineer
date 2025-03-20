@@ -21,14 +21,14 @@ pipeline {
                 }
             }
         }
-        stage('docker-compose-create-and-start'){
-            steps {
-                script {
-                    def retries = 3
-                    def exitCode = 1
+    stage('docker-compose-create-and-start'){
+        steps {
+            script {
+                def retries = 3
+                def exitCode = 1
 
-                    retry(retries) {
-                        def result = sh(script: 'docker-compose -f docker-composes/docker-compose-up.yml up -d', returnStatus: true)
+                retry(retries) {
+                    def result = sh(script: 'docker-compose -f docker-composes/docker-compose-up.yml up -d', returnStatus: true)
                         exitCode = result
                     }
 
@@ -36,16 +36,6 @@ pipeline {
                         error "Failed to start docker-compose after $retries retries."
                     }
                 }
-            }
-        }
-        stage('List Docker Containers'){
-            steps {
-                sh 'bash Jenkins/Integration/SeleniumHubUp/captureContainerInfo.sh'
-            }
-        }
-        stage('Archive Artifacts') {
-            steps {
-                archiveArtifacts artifacts: 'container_info.json', allowEmptyArchive: true
             }
         }
     }

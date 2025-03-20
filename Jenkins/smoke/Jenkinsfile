@@ -23,45 +23,29 @@ pipeline {
                     sh 'docker-compose -f docker-composes/docker-compose-up.yml ps'
                 }
         }
-        stage('Retrieve Container Info') {
-            steps {
-                copyArtifacts(
-                    projectName: 'selenium-hub-up',
-                    filter: 'container_info.json',
-                    target: './'
-                )
-            }
-        }
-        stage('test-tcs-chrome') {
+        stage('smoke-test-chrome') {
             steps {
                 script {
-                    sh 'mvn surefire:test -Dtest=StaffTNGTest -Dbrowser=chrome'
+                    sh 'mvn surefire:test -Dtest=PetroleumIndexDataVerificationTNGTest -Dbrowser=chrome'
                 }
             }
-        }
-        stage('test-tcs-msedge') {
-            steps {
-                script {
-                    sh 'mvn surefire:test -Dtest=StaffTNGTest -Dbrowser=msedge'
-                }
-            }
-        }
+        }       
     }
     post {
         always {
-                    echo "Notifying build result by email to nlopez@hchb.com"
+                    echo "Notifying build result by email to nlopez2@kopiustech.com"
                 }
         success {
-                    emailext body: 'The OTP-Smoke Test has been successful', compressLog: true, subject: 'OTP-SmokeTest - successful', to: 'nlopez@hchb.com'
+                    emailext body: 'The CME-Smoke Test has been successful', compressLog: true, subject: 'CME-SmokeTest - successful', to: 'nlopez2@kopiustech.com'
                 }
         failure {
-                    emailext body: 'The OTP-Smoke Test was marked as failure', compressLog: true, subject: 'OTP-SmokeTest - FAILURE', to: 'nlopez@hchb.com'
+                    emailext body: 'The CME-Smoke Test was marked as failure', compressLog: true, subject: 'CME-SmokeTest - FAILURE', to: 'nlopez2@kopiustech.com'
                 }
         unstable {
-                    emailext body: 'The OTP-Smoke Test was marked as unstable', compressLog: true, subject: 'OTP-SmokeTest - UNSTABLE', to: 'nlopez@hchb.com'
+                    emailext body: 'The CME-Smoke Test was marked as unstable', compressLog: true, subject: 'CME-SmokeTest - UNSTABLE', to: 'nlopez2@kopiustech.com'
                  }
         changed {
-                    emailext body: 'The OTP-Smoke Test was previously failing but is now successful', compressLog: true, subject: 'OTP-SmokeTest - CHANGED', to: 'nlopez@hchb.com'
+                    emailext body: 'The CME-Smoke Test was previously failing but is now successful', compressLog: true, subject: 'CME-SmokeTest - CHANGED', to: 'nlopez2@kopiustech.com'
                 }
     }
 }

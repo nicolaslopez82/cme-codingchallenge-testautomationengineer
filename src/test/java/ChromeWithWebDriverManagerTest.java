@@ -1,5 +1,3 @@
-package driver.manager;
-
 import cache.PropertiesCache;
 import constants.CMEConstants;
 import io.github.bonigarcia.wdm.WebDriverManager;

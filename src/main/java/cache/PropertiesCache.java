@@ -3,7 +3,6 @@ package cache;
 import utils.Paths;
 
 import java.io.*;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 

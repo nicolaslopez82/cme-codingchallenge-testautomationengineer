@@ -101,7 +101,6 @@ public class TimeHelper {
         }
     }
 
-    // Updateed 08/2024
     //Data Structure for add more ZoneTimes as "America/New_York" for Eastern Daylight Time,
     // Eastern Standard Time and Eastern Time that is not on the ZoneId Java Class.
     //If we need to add more ZoneTimes, they should be added on mapZone variable.
@@ -123,7 +122,6 @@ public class TimeHelper {
     }
 
 
-    //Updated 08/2024
     public static String getDateTimeByZoneID(String timezone) {
         // Get the mapped timezones
         Map<String, String> mapZone = generateMappedTimeZones();
