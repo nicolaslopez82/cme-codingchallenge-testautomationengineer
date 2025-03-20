@@ -2,6 +2,7 @@ package utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 
@@ -25,11 +26,15 @@ public class CommonTestOperation {
         }
     }
 
+    public static void maximizeWindow(WebDriver driver) {
+        driver.manage().window().maximize();
+    }
+
     private static String getCurrentMethodName() {
         return Thread.currentThread().getStackTrace()[2].getMethodName();
     }
 
-    public  static void logException(Exception e){
+    public static void logException(Exception e){
         logger.error("Exception occurred on Testcase" + Thread.currentThread().getStackTrace()[1].getMethodName() + " failed", e);
         System.out.println("Exception occurred on Testcase " + Thread.currentThread().getStackTrace()[1].getMethodName() + " failed");
         Assert.fail();

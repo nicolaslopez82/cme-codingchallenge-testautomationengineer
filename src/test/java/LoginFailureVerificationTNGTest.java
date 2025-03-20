@@ -15,9 +15,10 @@ public class LoginFailureVerificationTNGTest extends ChromeWithWebDriverManagerT
         WebDriver driver = super.getDriver();
         CommonTestOperation.setupTest("loginFailureVerification", "Verify that attempting to log in with the username '00000'" +
                 "and password '00000' results in a red error message containing the text 'we are " +
-                "having trouble logging you in.'")  ;
+                "having trouble logging you in.'");
         try{
-            LoginPage.launchCMELogin(driver, PropertiesCache.getInstance().getProperty(CMEConstants.CME_PORTAL_TEST_URL));
+            LoginPage.launchCMELogin(driver, PropertiesCache.getInstance().getProperty(CMEConstants.CME_PORTAL_TEST_URL_LOGIN));
+            CommonTestOperation.maximizeWindow(driver);
             Assert.assertTrue(super.findElementWaitForVisible(By.xpath("//*[@id='login-panel']")).isDisplayed());
             LoginPage.setTextInUsername(driver);
             LoginPage.setTextInPassword(driver);

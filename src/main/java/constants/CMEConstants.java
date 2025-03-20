@@ -22,6 +22,7 @@ public class CMEConstants {
     public static final String CME_PORTAL_TEST_MAXIMIZE_WINDOW = "cme.portal.test.maximize.window";
     public static final String CME_PORTAL_TEST_DATA_VALID_USER = "cme.portal.test.data.valid.user";
     public static final String CME_PORTAL_TEST_DATA_VALID_PASS = "cme.portal.test.data.valid.pass";
+    public static final String CME_PORTAL_TEST_URL_LOGIN = "cme.portal.test.url.login";
     public static final String CME_PORTAL_TEST_URL = "cme.portal.test.url";
 
     // Selenium Grid-Docker
