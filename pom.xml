@@ -167,8 +167,8 @@
         <version>${maven-surefire-plugin.version}</version>
         <configuration>
           <suiteXmlFiles>
-<!--            <suiteXmlFile>ActivitiesTNGTest.xml</suiteXmlFile>-->
-<!--            <suiteXmlFile>ClosedActivitiesTNGTest.xml</suiteXmlFile>-->
+            <suiteXmlFile>LoginFailureVerificationTNGTest.xml</suiteXmlFile>
+<!--            <suiteXmlFile>PetroleumIndexDataVerificationTNGTest.xml</suiteXmlFile>-->
           </suiteXmlFiles>
           <systemPropertyVariables>
             <browser>${browser}</browser>
