@@ -1,5 +1,7 @@
 import cache.PropertiesCache;
+import com.relevantcodes.extentreports.LogStatus;
 import constants.CMEConstants;
+import extentreport.ExtentTestManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
@@ -9,10 +11,18 @@ import utils.CommonTestOperation;
 
 import static org.testng.Assert.assertTrue;
 
-public class PetroleumIndexDataVerificationTNGTest extends ChromeWithWebDriverManagerTest{
+public class PetroleumIndexDataVerificationTNGTest extends WebDriverManagerTest {
 
     @Test(groups = "smoke")
     public void petroleumIndexDataVerification (){
+
+        ExtentTestManager.getTest().log(LogStatus.INFO, """
+                PetroleumIndexDataVerification test description:
+                Navigate to the 'Petroleum Index' page by clicking 'Data' and then 'Petroleum Index' in the header navigation bar. 
+                There, verify that the proper service data matches with the values displayed in the 2 tables (End of Day Index Value and Intraday Index Value 5 Minute Intervals) 
+                - Important: You need to find what’s the service to be verified.""");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "petroleumIndexDataVerification smoke test started");
+
         WebDriver driver = super.getDriver();
         CommonTestOperation.setupTest("petroleumIndexDataVerification", "Navigate to the 'Petroleum Index' page by " +
                 "clicking 'Data' and then 'Petroleum Index' in the header navigation bar. There, verify " +
@@ -77,6 +87,7 @@ public class PetroleumIndexDataVerificationTNGTest extends ChromeWithWebDriverMa
         } catch(Exception e){
             CommonTestOperation.logException(e);
         }
+        ExtentTestManager.getTest().log(LogStatus.INFO, "petroleumIndexDataVerification smoke test completed");
     }
 
 }

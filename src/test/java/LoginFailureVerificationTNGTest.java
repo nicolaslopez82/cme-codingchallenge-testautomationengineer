@@ -1,16 +1,28 @@
 import cache.PropertiesCache;
+import com.relevantcodes.extentreports.LogStatus;
 import constants.CMEConstants;
+import extentreport.ExtentTestManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import pagesObjects.LoginPage;
 import utils.CommonTestOperation;
+
 import static org.testng.Assert.assertTrue;
 
-public class LoginFailureVerificationTNGTest extends ChromeWithWebDriverManagerTest {
+public class LoginFailureVerificationTNGTest extends WebDriverManagerTest {
 
     @Test(groups = "regression")
     public void loginFailureVerification (){
+
+        ExtentTestManager.getTest().log(LogStatus.INFO, """
+                LoginFailureVerification test description:
+                Verify that attempting to log in with the username "00000"
+                and password "00000" results in a red error message containing the text "we are
+                having trouble logging you in.""");
+        ExtentTestManager.getTest().log(LogStatus.INFO, "loginFailureVerification regression test started");
+
         WebDriver driver = super.getDriver();
         CommonTestOperation.setupTest("loginFailureVerification", "Verify that attempting to log in with the username '00000'" +
                 "and password '00000' results in a red error message containing the text 'we are " +
@@ -28,5 +40,6 @@ public class LoginFailureVerificationTNGTest extends ChromeWithWebDriverManagerT
         } catch(Exception e){
             CommonTestOperation.logException(e);
         }
+        ExtentTestManager.getTest().log(LogStatus.INFO, "loginFailureVerification regression test completed");
     }
 }
