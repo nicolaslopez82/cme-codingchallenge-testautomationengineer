@@ -85,6 +85,10 @@ https://github.com/user-attachments/assets/a658fb47-9ed3-47b0-a6f3-3b7ec323a5eb
   //Main.main(new String[] { "standalone", "--port", "4445" });
   Main.main(new String[] { "standalone", "--port", "5555" });
 
+  driver = WebDriverManager.chromedriver()
+  //.remoteAddress("http://localhost:4445/wd/hub").create();
+  .remoteAddress("https://hub-coding-challenge:5555").create();
+    
 ### **Jenkins Server files:**
 - On your Jenkins server you should install Docker.
 - Create a pipeline with 4 jobs.
