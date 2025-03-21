@@ -86,3 +86,5 @@ The same process to execute the `PetroleumIndexDataVerificationTNGTest.java` Tes
 
 ## **How to See the Extend Reports**
 - After executing whatever Test Case, go to ```project``` tab in your IDE, find the folder called `ExtentReports`, open the folder, select the `.html` file Extend Report (`ExtentReportsResults-yyyy-MM-dd-hh-mm-ss.html`), right-click -> Open In -> Browser -> Chrome.
+  ![extentreport-dashboard](https://github.com/nicolaslopez82/cme-codingchallenge-testautomationengineer/blob/master/ReadmeImages/extentreports-dashboard.png)
+  ![extentreport-testcases](https://github.com/nicolaslopez82/cme-codingchallenge-testautomationengineer/blob/master/ReadmeImages/extentreports-testcases.png)
