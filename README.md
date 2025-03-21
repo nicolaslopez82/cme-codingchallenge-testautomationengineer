@@ -57,7 +57,7 @@ any OOP principle and/or any test automation pattern that you think might apply.
 - This project was developed with ```IntelliJ IDEA 2024.3.4.1 (Ultimate Edition)``` and on Linux as OS.
 
 ## **Installation**
-**1)** Clone or download the project.
+**1)** Clone or download the project. 
 
 **2)** Import the project from ```poxm.xml``` file from your IDE.
 
@@ -78,6 +78,12 @@ The same process to execute the `PetroleumIndexDataVerificationTNGTest.java` Tes
 
 https://github.com/user-attachments/assets/a658fb47-9ed3-47b0-a6f3-3b7ec323a5eb
 
+### **Option for the ability to run tests on a Selenium Grid server with the hub address `https://hub-coding-challenge:5555`:**
+- In the `WebDriverManagerTest.java` should be commented and uncommented the following lines:
+  ```java
+  // Start Selenium Grid in standalone mode
+  //Main.main(new String[] { "standalone", "--port", "4445" });
+  Main.main(new String[] { "standalone", "--port", "5555" });
 
 ### **Jenkins Server files:**
 - On your Jenkins server you should install Docker.

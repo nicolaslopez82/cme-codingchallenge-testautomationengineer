@@ -2,7 +2,6 @@ import cache.PropertiesCache;
 import com.relevantcodes.extentreports.LogStatus;
 import constants.CMEConstants;
 import extentreport.ExtentTestManager;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
