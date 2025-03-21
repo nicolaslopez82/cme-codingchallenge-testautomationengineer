@@ -68,9 +68,16 @@ any OOP principle and/or any test automation pattern that you think might apply.
 - Go to ```project``` tab in your IDE, find the file called: `LoginFailureVerificationTNGTest.xml`, select it and right-click to select the option `Run '...LoginFailureVerificationTNGTest.xml` and the Test will start to run.
 The same process to execute the `PetroleumIndexDataVerificationTNGTest.xml` Test Case.
 
+
+https://github.com/user-attachments/assets/709b1a0b-769b-4231-9937-afc4279bf774
+
+
 ### **Option Class files:**
 - Go to ```project``` tab in your IDE, find the file called: `LoginFailureVerificationTNGTest.java` (located at: `src/test/java/LoginFailureVerificationTNGTest.java`), select it and right-click to select the option `Run 'LoginFailureVerificationTNGTest` and the Test will start to run.
 The same process to execute the `PetroleumIndexDataVerificationTNGTest.java` Test Case.
+
+https://github.com/user-attachments/assets/a658fb47-9ed3-47b0-a6f3-3b7ec323a5eb
+
 
 ### **Jenkins Server files:**
 - On your Jenkins server you should install Docker.
