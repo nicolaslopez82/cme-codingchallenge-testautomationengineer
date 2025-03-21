@@ -189,7 +189,7 @@
         <configuration>
           <suiteXmlFiles>
             <suiteXmlFile>LoginFailureVerificationTNGTest.xml</suiteXmlFile>
-<!--            <suiteXmlFile>PetroleumIndexDataVerificationTNGTest.xml</suiteXmlFile>-->
+            <suiteXmlFile>PetroleumIndexDataVerificationTNGTest.xml</suiteXmlFile>
           </suiteXmlFiles>
           <systemPropertyVariables>
             <browser>${browser}</browser>
