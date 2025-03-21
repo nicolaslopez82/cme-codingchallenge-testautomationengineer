@@ -50,7 +50,27 @@ public class PetroleumPage {
     public static boolean verifyPetroleumIndexPage(WebDriver driver) throws Exception {
         // Define the xpath for the Petroleum Index page.
         By dataLinkPath = By.id("cme-group-petroleum-index");
-        // Use the isElementDisplayed method to verify if the Market Data Home is displayed.
+
+        // Use the isElementDisplayed method to verify if the CME Group Petroleum Index" is displayed.
         return Functions.isElementDisplayed(driver, dataLinkPath, "CME Group Petroleum Index", 30);
     }
+
+    public static boolean launchPetroleumPriceService(WebDriver driver, String url) {
+        try {
+            // Navigate to the specified URL
+            driver.get(url);
+
+            // Short sleep to allow the page to fully load
+            Thread.sleep(2500);
+
+            // Check if the current URL matches the expected URL with a trailing slash
+            return driver.getCurrentUrl().equals(url + "/");
+
+        } catch (Exception e) {
+            // Log any exception encountered
+            System.out.println("Exception=" + e);
+            return false;
+        }
+    }
+
 }

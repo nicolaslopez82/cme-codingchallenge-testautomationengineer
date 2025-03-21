@@ -2,7 +2,6 @@ import cache.PropertiesCache;
 import constants.CMEConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
 import pagesObjects.LoginPage;
 import utils.CommonTestOperation;

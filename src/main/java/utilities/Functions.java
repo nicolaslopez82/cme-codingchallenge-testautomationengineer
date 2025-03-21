@@ -1,12 +1,6 @@
 package utilities;
 
-import java.sql.Timestamp;
 import java.time.Duration;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.Map;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,9 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import static utilities.TimeHelper.generateMappedTimeZones;
-
 
 public class Functions {
 
@@ -180,27 +171,6 @@ public class Functions {
 	public static String getNonAlphanumaticCharactersCleanedSentence (String vtext1) {
 		return vtext1.replaceAll("[^A-Za-z0-9 ]", "");
 
-	}
-
-	public static Date getDateTimeByZoneId(String timeZoneName) {
-		// Get the map of timezones
-		Map<String, String> mapZone = generateMappedTimeZones();
-
-		// Retrieve the full timezone ID from the map
-		String fullTimeZoneId = mapZone.getOrDefault(timeZoneName, timeZoneName);
-
-		// Get the current ZonedDateTime for the given time zone
-		ZonedDateTime now = ZonedDateTime.now(ZoneId.of(fullTimeZoneId));
-
-		// Convert ZonedDateTime to Timestamp
-		Timestamp timestamp = Timestamp.valueOf(now.toLocalDateTime());
-		System.out.println("Timestamp: " + timestamp);
-
-		// Convert Timestamp to Date
-		Date date = new Date(timestamp.getTime());
-		System.out.println("Date: " + date);
-
-		return date;
 	}
 
 	public static boolean isElementDisplayed(WebDriver driver, By locator, String elementDescription, int timeout) {
