@@ -25,7 +25,7 @@ public class PetroleumIndexRestAssuredDataVerification extends WebDriverManagerT
         petroleumIndexObject = new PetroleumIndexObject();
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void testGetPetroleumPrice(){
 
         ExtentTestManager.getTest().log(LogStatus.INFO, """
